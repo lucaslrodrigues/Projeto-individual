@@ -1,5 +1,5 @@
-create database saturn;
-use saturn;
+create database fisic;
+use fisic;
 
 create table usuario(
 idUsuario int primary key auto_increment,
@@ -15,3 +15,9 @@ dtTentativa datetime,
 fkUsuario int, foreign key (fkUsuario) references usuario(idUsuario),
 primary key (idTentativa, fkUsuario)
 );
+
+create user 'user'@'localhost' identified by 'user123';
+grant insert, select on fisic.usuario to 'user'@'localhost';
+grant insert, select on fisic.tentativa to 'user'@'localhost';
+flush privileges;
+drop user 'user'@'localhost';
