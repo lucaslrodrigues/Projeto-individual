@@ -6,7 +6,7 @@ body{
     height: 100%;
 }
 .tela1{
-    background: rgb(32, 32, 32) url(Imagens/estrelas100vh.png);
+    background: rgb(32, 32, 32) url(https://media4.giphy.com/media/W5GyJBpRgszhm/giphy.gif?cid=ecf05e47ksqnifr9mcob26kwhfjpc5i89tcngf8s2yfhz7k7&rid=giphy.gif&ct=g);
     width: 100%;
     height:84vh;
     background-size: 100%;
@@ -78,4 +78,16 @@ li{
 .data{
     font-weight: 700;
     font-size: 35px;
+}
+/* Tela 3 */
+
+.tela3_conteudo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 84vh;
+    justify-content: space-around;
+}
+.tela3_conteudo .titulo{
+
 }
