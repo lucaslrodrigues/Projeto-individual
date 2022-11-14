@@ -48,7 +48,7 @@ function buscarMedidasEmTempoReal(idAquario) {
         instrucaoSql = `select 
         dht11_temperatura as temperatura, 
         dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s')  as momento_grafico,
+                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
                         fk_aquario 
                         from medida where fk_aquario = ${idAquario} 
                     order by id desc limit 1`;
