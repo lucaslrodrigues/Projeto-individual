@@ -21,3 +21,5 @@ grant insert, select on ciencia.usuario to 'user'@'localhost';
 grant insert, select on ciencia.tentativa to 'user'@'localhost';
 flush privileges;
 drop user 'user'@'localhost';
+
+select * from usuario;
