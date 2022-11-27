@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+.container{
+    /* border: solid 3px yellow; */
+    width: 80%;
+    margin: auto;
+}
+header{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    height: 7vh;
+}
+nav{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+li{
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+nav a{
+    height: 22px;
+    align-items: center;
+    /* padding: 0 7%; */
+}
+nav a:hover{
+    border-bottom: solid 2px white;
+    /* background-color: #312961; */
+    /* padding: 0 7%; */
+    /* border-radius: 4px; */
+}
+
+
+/* Conteudo */
+
+.content{
+    width: 100%;
+    height: 100%;
+    background-color: #2e2e2e;
+}
+.game{
+    width: 80%;
+    height: 93vh;
+    margin: auto;
+}
+.game_area{
+    height: 60%;
+    background-image: url(Imagens/figma/e=mc2\(novo\).png);
+}
+.game_top{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 20%;
+}
+
+/*--------- JOGO ---------*/
+
+.game_images{
+    border: solid 3px white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.game img{
+    width: 80%;
+}
+
+/* geral */
+.point{
+    position: absolute;
+    margin: -105px 0 0 -795px;
+}
+
+.text_information{
+    position: absolute;
+    color: white;
+    width: 50%;
+    align-self: flex-end;
+}
+
+/* Botão de sair */
+.exit_button_style{
+    position: absolute;
+    width: 30px;
+    height: 35px;
+    z-index: 2;
+    background-color: transparent;
+    border: solid 3px red;
+    /* border: none; */
+    display: flex;
+    margin: 385px 0 0 -720px;
+}
+
+/* PRINCIPAL */
+
+/* tabela periodica */
+.game_area1_tabela{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    z-index: 2;
+    background-color: transparent;
+    position: absolute;
+    margin: 200px 0 0 -275px;
+}
+
+
+
+/* Tela jornal */
+.game_area1_journal{
+    width: 40px;
+    height: 34px;
+    border-radius: 20px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    margin: 180px 0 0 -215px;
+}
+
+/* Tela foto */
+.game_area1_foto{
+    border: red solid 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    /* border: none; */
+    background-color: transparent;
+    position: absolute;
+    margin: 190px 0 0 -115px;
+}
+
+/* Tela cofre */
+.game_area1_cofre{
+    border: red solid 3px;
+    width: 35px;
+    height: 25px;
+    border-radius: 20px;
+    /* border: none; */
+    background-color: transparent;
+    position: absolute;
+    margin: 195px 0 0 70px;
+}
