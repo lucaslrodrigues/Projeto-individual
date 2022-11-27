@@ -20,8 +20,8 @@
         <div class="game">
             <div class="game_top">
                 <div class="game_top_content">
-                    <span class="title"><b>ScapeRoom</b>: Quarto do Einstein.</span>
-                    <span class="text_normal">Tente resolver o enigma para escapar do quarto do einstein.</span>
+                    <span class="title"><b>ScapeRoom</b>: Sala do Einstein.</span>
+                    <span class="text_normal">Tente resolver o enigma para escapar da sala do einstein.</span>
                     <span class="text_normal">Ajuste o tamanho da tela até que o ponto vermelho esteja no canto da tela.</span>
                 </div>
             </div>
@@ -34,6 +34,8 @@
                 <button onclick="game_area1_foto()" class="game_area1_foto"></button>
                 <button onclick="game_area1_cofre()" class="game_area1_cofre"></button>
                 <button onclick="game_area1_relogio()" class="game_area1_relogio"></button>
+                <button onclick="game_area1_galaxiasGuia()" class="game_area1_galaxiasGuia"></button>
+                <button onclick="game_area1_galaxias()" class="game_area1_galaxias"></button>
 
                 <span style="color: red; font-size: 80pt" class="point">.</span>
             </div>
@@ -41,21 +43,21 @@
             <!-- Tela tabela periodica -->
             <div id="game_area2" class="game_images" style="display: none;">
                 <img src="Estilos/Imagens/scape room/tabelaCortada.png">
-                <span class="text_information">Uma tabela periodica! alguns desses elementos são aprendidos na escola, como B sendo o "Boro", o Co sendo o cobalto. Mas o C eu não consigo lembrar... me lembra um banco.</span>
+                <span class="text_information">Uma tabela periodica! alguns desses elementos são aprendidos na escola, como "B" sendo o Boro, o "Co" sendo o cobalto. Mas o C eu não consigo lembrar... me lembra um banco.</span>
                 <button class="exit_button_style" id="exit_button1" onclick="exit1()"></button>
             </div>
 
             <!-- Tela jornal -->
             <div id="game_area3" class="game_images" style="display: none;">
                 <img src="Estilos/Imagens/scape room/journalGrifado.png">
-                <span class="text_information">Um jornal antigo falando sobre o einstein. a manchete tem algo grifado, "... <span style="color:rgb(202, 226, 49);">Albert einstein foi laureado com o 25º premio nobel da física</span>...".</span>
+                <span class="text_information">Um jornal antigo falando sobre o einstein. a manchete tem algo grifado, "... <span style="color:rgb(202, 226, 49);">Albert einstein foi laureado com o 25º premio nobel da física</span>...". Talvez seja importante!</span>
                 <button class="exit_button_style" id="exit_button2" onclick="exit2()"></button>
             </div>
 
             <!-- Tela foto -->
             <div id="game_area4" class="game_images" style="display: none;">
                 <img src="Estilos/Imagens/scape room/fotoEinstein.png">
-                <span class="text_information">Uma das fotos que einstein enviava para seus amigos, ele as autografava... Espera! Esse autografo... "De Albert Einstein para (carbon / √(stars)) * <span style="color:red;">?</span>"... o último numero está ilegivel.</span>
+                <span class="text_information">Uma das fotos que einstein enviava para seus amigos, ele as autografava... Espera! Esse autografo... "De Albert Einstein para (carbon * √(SBb / S0)) * <span style="color:red;">?</span>"... o último numero está ilegivel. O que ele queria dizer com isso?</span>
                 <button class="exit_button_style" id="exit_button3" onclick="exit3()"></button>
             </div>
 
@@ -66,30 +68,46 @@
                 <span class="text_information">Um cofre velho que só pode ser aberto com uma combinação de três números. O que sera que tem aqui dentro!?</span>
                 <button class="exit_button_style" id="exit_button4" onclick="exit5()"></button>
 
-                <input type="text" class="sequencia1" id="seq1" maxlength="1" oninput="verify_seq()">
-                <input type="text" class="sequencia2" id="seq2" maxlength="1" oninput="verify_seq()">
-                <input type="text" class="sequencia3" id="seq3" maxlength="1" oninput="verify_seq()">
+                <input type="text" class="sequencia2" id="seq2" maxlength="1" onkeyup="verify_seq()">
+                <input type="text" class="sequencia1" id="seq1" maxlength="1" onkeyup="verify_seq()">
+                <input type="text" class="sequencia3" id="seq3" maxlength="1" onkeyup="verify_seq()">
             </div>
             <!-- Cofre aberto -->
             <div id="game_area5_2" class="game_images" style="display: none;">
                 <img src="Estilos/Imagens/scape room/cofre.png">
                 <span class="text_information">Um cofre velho que só pode ser aberto com uma combinação de três números. O que sera que tem aqui dentro!?</span>
-                <button class="exit_button_style" id="exit_button4" onclick="exit5()"></button>
+                <button class="exit_button_style" id="exit_button5" onclick="exit5()"></button>
             </div>
 
             <!-- Relogio -->
             <div id="game_area6" class="game_images" style="display: none;">
                 <img src="Estilos/Imagens/scape room/Relogio na parede.png">
                 <span class="text_information_clock">Veja só, já estou nessa sala a <span id="minutes_stopwatcher"></span></span>
-                <button class="exit_button_style" id="exit_button4" onclick="exit6()"></button>
+                <button class="exit_button_style" id="exit_button6" onclick="exit6()"></button>
+            </div>
+
+            <!-- Livro guia -->
+            <div id="game_area7" class="game_images" style="display: none;">
+                <img src="Estilos/Imagens/scape room/livroGalaxiasGuia2.png">
+                <span class="text_information">Galaxias espirais, elipticas, espiral barrada e irregulares. Existem varios tipos delas. A mais proxima fica a  2,54 milhões de anos-luz. O que significa que se apontassem um telescopio para nós eles veriam os dinossauros na terra!</span>
+                <button class="exit_button_style" id="exit_button7" onclick="exit7()"></button>
+            </div>
+
+            <!-- Livro com o enigma -->
+            <div id="game_area8" class="game_images" style="display: none;">
+                <img src="Estilos/Imagens/scape room/livroGalaxias.png">
+                <span class="text_information">Um livro com fotografias de galaxias! Esses formatos parecem ter sido feitos a mão.</span>
+                <button class="exit_button_style" id="exit_button8" onclick="exit8()"></button>
             </div>
 
             <!-- Finalizado -->
-            <!-- <div id="game_area6" class="game_images" style="display: none;">
-                <img src="Estilos/Imagens/scape room/Relogio na parede.png">
-                <span class="text_information_clock">Veja só, já estou nessa sala a <span id="minutes_stopwatcher"></span></span>
-                <button class="exit_button_style" id="exit_button4" onclick="exit6()"></button>
-            </div> -->
+            <div id="game_area9" class="gameFinalizado" style="display: none;">
+                <div class="gameFinalizado_content">
+                    <span class="">Parabéns!! você escapou</span>
+                    <div><img src="Estilos/Imagens/scape room/chave.png" style="width: 10%;"></div>
+                </div>
+            </div>
+
         </div>
     </section>
 </body>
@@ -103,7 +121,7 @@
     var minutes = 0;
     var secondTemp = 0;
     var minuteTemp = 0;
-    var ary_times = ['Segundos','Minutos']
+    var hours = 0;
 
     function time(){
         seconds++;
@@ -117,10 +135,21 @@
         }else{
             minuteTemp = monutes
         }
-        if(minutes == 0){
-            minutes_stopwatcher.innerHTML = `${minuteTemp}:${secondTemp} segundos!`
+
+        if(hours < 10){
+            hoursTemp = ('0' + String(hours))
         }else{
-            minutes_stopwatcher.innerHTML = `${minuteTemp}:${secondTemp} minutos!`
+            hoursTemp = hours
+        }
+
+        if(minutes == 0){
+            minutes_stopwatcher.innerHTML = `${hoursTemp}:${minuteTemp}:${secondTemp} segundos!`
+        }else{
+            minutes_stopwatcher.innerHTML = `${hoursTemp}:${minuteTemp}:${secondTemp} minutos!`
+        }
+        if(minutes == 60){
+            minutes = 0;
+            hours ++;
         }
         if(seconds==60){
             minutes++;
@@ -129,11 +158,12 @@
     }
     setInterval(function(){ time() },1000)
 
-    var verify_cofre = true;
     // Tela principal
     function game_area1_tabela(){
         game_area1.style.display = "none"
         game_area2.style.display = "flex"
+        var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
+        alert(tempo)
     }
     function game_area1_jornal(){
         game_area3.style.display = "flex"
@@ -144,19 +174,23 @@
         game_area1.style.display = "none"
     }
     function game_area1_cofre(){
-        if(verify_cofre){
-            game_area5_1.style.display = "flex"
-            game_area1.style.display = "none"
-        }else{
-            game_area5_2.style.display = "flex"
-            game_area1.style.display = "none"
-        }
+        game_area5_1.style.display = "flex"
+        game_area1.style.display = "none"
     }
     function game_area1_relogio(){
         game_area6.style.display = "flex"
         game_area1.style.display = "none"
         var stopwatcher = true;
     }
+    function game_area1_galaxiasGuia(){
+        game_area7.style.display = "flex"
+        game_area1.style.display = "none"
+    }
+    function game_area1_galaxias(){
+        game_area8.style.display = "flex"
+        game_area1.style.display = "none"
+    }
+
 
     // Botão sair
     function exit1(){
@@ -176,20 +210,33 @@
         game_area5.style.display = "none"
     }
     function exit5(){
+        seq1.value = '';
+        seq2.value = '';
+        seq3.value = '';
         game_area1.style.display = "flex"
         game_area5_1.style.display = "none"
-        game_area5_2.style.display = "none"
     }
     function exit6(){
         game_area1.style.display = "flex"
         game_area6.style.display = "none"
         stopwatcher = false;
     }
+    function exit7(){
+        game_area1.style.display = "flex"
+        game_area7.style.display = "none"
+    }
+    function exit8(){
+        game_area1.style.display = "flex"
+        game_area8.style.display = "none"
+    }
 
     // Sequencia do cofre
     function verify_seq(){
-        if(seq1.value == '1' && seq2.value == '1' && seq3.value == '1'){
-            verify_cofre = false;
+        // alert('Acabou')
+        if(seq1.value == '5' && seq2.value == '4' && seq3.value == '0'){
+            game_area9.style.display = 'flex'
+            game_area5_1.style.display = 'none'
+            var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
         }
     }
 

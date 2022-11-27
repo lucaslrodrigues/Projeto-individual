@@ -92,7 +92,7 @@ nav a{
 /*--------- JOGO ---------*/
 
 .game_images{
-    /* border: solid 3px white; */
+    border: solid 3px white;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -227,4 +227,45 @@ nav a{
     color: black;
     width: 50%;
     margin: 350px 0 0 300px;
+}
+/* Livro guia de galáxias */
+.game_area1_galaxiasGuia{
+    /* border: solid 3px red; */
+    width: 25px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    margin: 105px 0 0 70px;
+}
+
+/* Livro galaxias */
+.game_area1_galaxias{
+    /* border: solid 3px red; */
+    width: 40px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    margin: 155px 0 0 145px;
+}
+
+/* Tela de finalização */
+
+.gameFinalizado{
+    border: white solid 3px;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.gameFinalizado_content{
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    background-color: aliceblue;
 }
