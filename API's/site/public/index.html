@@ -12,8 +12,11 @@
         <header>
             <div class="container">
                 <nav>
-                    <li><a href="login.html">Login</a></li>
-                    <li>Lucas <img class="gif_lua" src="https://media.tenor.com/9pMpw3ZD4CEAAAAC/storymaker-moon.gif" alt="gif" style="width:30px;"></li>
+                    <div class="items">
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="interacao.html">ScapeRoom</a></li>
+                    </div>
+                    <li><span id="nome_usuario"></span> <img class="gif_lua" src="https://media.tenor.com/9pMpw3ZD4CEAAAAC/storymaker-moon.gif" alt="gif" style="width:30px;"></li>
                 </nav>
             </div>
         </header>
@@ -142,3 +145,10 @@
     </footer>
 </body>
 </html>
+<script>
+    var verify_login = sessionStorage.LOGADO;
+    if(verify_login == "true"){
+        var nome = sessionStorage.NOME_USUARIO;
+        nome_usuario.innerHTML = `${nome}`
+    }
+</script>

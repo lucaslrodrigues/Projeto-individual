@@ -12,16 +12,18 @@
         <div class="container">
             <nav>
                 <li><a href="index.html">Home</a></li>
-                <li>Lucas <img class="gif_lua" src="https://media.tenor.com/9pMpw3ZD4CEAAAAC/storymaker-moon.gif" alt="gif" style="width:30px;"></li>
+                <li><span id="nome_usuario"></span> <img class="gif_lua" src="https://media.tenor.com/9pMpw3ZD4CEAAAAC/storymaker-moon.gif" alt="gif" style="width:30px;"></li>
             </nav>
         </div>
     </header>
     <section class="content">
         <div class="game">
             <div class="game_top">
-                <h3><b>ScapeRoom</b>: Quarto do Einstein</h3>
-                <span>Tente resolver os enigmas para escapar do quarto do einstein</span>
-                <span>Ajuste o tamanho da tela até que o ponto vermelho esteja no canto da tela</span>
+                <div class="game_top_content">
+                    <span class="title"><b>ScapeRoom</b>: Quarto do Einstein.</span>
+                    <span class="text_normal">Tente resolver o enigma para escapar do quarto do einstein.</span>
+                    <span class="text_normal">Ajuste o tamanho da tela até que o ponto vermelho esteja no canto da tela.</span>
+                </div>
             </div>
 
             <!-- Tela principal -->
@@ -31,6 +33,7 @@
                 <button onclick="game_area1_jornal()" class="game_area1_journal"></button>
                 <button onclick="game_area1_foto()" class="game_area1_foto"></button>
                 <button onclick="game_area1_cofre()" class="game_area1_cofre"></button>
+                <button onclick="game_area1_relogio()" class="game_area1_relogio"></button>
 
                 <span style="color: red; font-size: 80pt" class="point">.</span>
             </div>
@@ -45,7 +48,7 @@
             <!-- Tela jornal -->
             <div id="game_area3" class="game_images" style="display: none;">
                 <img src="Estilos/Imagens/scape room/journalGrifado.png">
-                <span class="text_information">Um jornal antigo falando sobre o einstein. a manchete tem algo grifado, "... Albert einstein foi laureado com o <span style="color:rgb(202, 226, 49);">25º premio nobel da física</span>...".</span>
+                <span class="text_information">Um jornal antigo falando sobre o einstein. a manchete tem algo grifado, "... <span style="color:rgb(202, 226, 49);">Albert einstein foi laureado com o 25º premio nobel da física</span>...".</span>
                 <button class="exit_button_style" id="exit_button2" onclick="exit2()"></button>
             </div>
 
@@ -57,17 +60,76 @@
             </div>
 
             <!-- Tela cofre -->
-            <div id="game_area5" class="game_images" style="display: none;">
-                <img src="Estilos/Imagens/scape room/cofre.png">
-                <span class="text_information">Uma das fotos que einstein enviava para seus amigos, ele as autografava... Espera! Esse autografo... "De Albert Einstein para (carbon / √(stars)) * <span style="color:red;">?</span>"... o último numero está ilegivel.</span>
-                <button class="exit_button_style" id="exit_button4" onclick="exit4()"></button>
+            <!-- Cofre fechado -->
+            <div id="game_area5_1" class="game_images" style="display: none;">
+                <img src="Estilos/Imagens/scape room/cofre(arrumado).png">
+                <span class="text_information">Um cofre velho que só pode ser aberto com uma combinação de três números. O que sera que tem aqui dentro!?</span>
+                <button class="exit_button_style" id="exit_button4" onclick="exit5()"></button>
+
+                <input type="text" class="sequencia1" id="seq1" maxlength="1" oninput="verify_seq()">
+                <input type="text" class="sequencia2" id="seq2" maxlength="1" oninput="verify_seq()">
+                <input type="text" class="sequencia3" id="seq3" maxlength="1" oninput="verify_seq()">
             </div>
+            <!-- Cofre aberto -->
+            <div id="game_area5_2" class="game_images" style="display: none;">
+                <img src="Estilos/Imagens/scape room/cofre.png">
+                <span class="text_information">Um cofre velho que só pode ser aberto com uma combinação de três números. O que sera que tem aqui dentro!?</span>
+                <button class="exit_button_style" id="exit_button4" onclick="exit5()"></button>
+            </div>
+
+            <!-- Relogio -->
+            <div id="game_area6" class="game_images" style="display: none;">
+                <img src="Estilos/Imagens/scape room/Relogio na parede.png">
+                <span class="text_information_clock">Veja só, já estou nessa sala a <span id="minutes_stopwatcher"></span></span>
+                <button class="exit_button_style" id="exit_button4" onclick="exit6()"></button>
+            </div>
+
+            <!-- Finalizado -->
+            <!-- <div id="game_area6" class="game_images" style="display: none;">
+                <img src="Estilos/Imagens/scape room/Relogio na parede.png">
+                <span class="text_information_clock">Veja só, já estou nessa sala a <span id="minutes_stopwatcher"></span></span>
+                <button class="exit_button_style" id="exit_button4" onclick="exit6()"></button>
+            </div> -->
         </div>
     </section>
 </body>
 </html>
 <!-- <scrip src="scapeRoom.js"></script> -->
 <script>
+    const nome = sessionStorage.NOME_USUARIO;
+    nome_usuario.innerHTML = `${nome}`;
+
+    var seconds = 0;
+    var minutes = 0;
+    var secondTemp = 0;
+    var minuteTemp = 0;
+    var ary_times = ['Segundos','Minutos']
+
+    function time(){
+        seconds++;
+        if(seconds < 10){
+            secondTemp = ('0' + String(seconds))
+        }else{
+            secondTemp = seconds
+        }
+        if(minutes < 10){
+            minuteTemp = ('0' + String(minutes))
+        }else{
+            minuteTemp = monutes
+        }
+        if(minutes == 0){
+            minutes_stopwatcher.innerHTML = `${minuteTemp}:${secondTemp} segundos!`
+        }else{
+            minutes_stopwatcher.innerHTML = `${minuteTemp}:${secondTemp} minutos!`
+        }
+        if(seconds==60){
+            minutes++;
+            seconds=0;
+        }
+    }
+    setInterval(function(){ time() },1000)
+
+    var verify_cofre = true;
     // Tela principal
     function game_area1_tabela(){
         game_area1.style.display = "none"
@@ -82,8 +144,18 @@
         game_area1.style.display = "none"
     }
     function game_area1_cofre(){
-        game_area5.style.display = "flex"
+        if(verify_cofre){
+            game_area5_1.style.display = "flex"
+            game_area1.style.display = "none"
+        }else{
+            game_area5_2.style.display = "flex"
+            game_area1.style.display = "none"
+        }
+    }
+    function game_area1_relogio(){
+        game_area6.style.display = "flex"
         game_area1.style.display = "none"
+        var stopwatcher = true;
     }
 
     // Botão sair
@@ -102,6 +174,23 @@
     function exit4(){
         game_area1.style.display = "flex"
         game_area5.style.display = "none"
+    }
+    function exit5(){
+        game_area1.style.display = "flex"
+        game_area5_1.style.display = "none"
+        game_area5_2.style.display = "none"
+    }
+    function exit6(){
+        game_area1.style.display = "flex"
+        game_area6.style.display = "none"
+        stopwatcher = false;
+    }
+
+    // Sequencia do cofre
+    function verify_seq(){
+        if(seq1.value == '1' && seq2.value == '1' && seq3.value == '1'){
+            verify_cofre = false;
+        }
     }
 
 

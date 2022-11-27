@@ -48,6 +48,11 @@ nav{
     align-items: center;
     color: white;
 }
+.container nav .items{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
 li{
     z-index: 10;
     display: flex;
