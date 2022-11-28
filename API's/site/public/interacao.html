@@ -116,12 +116,16 @@
 <script>
     const nome = sessionStorage.NOME_USUARIO;
     nome_usuario.innerHTML = `${nome}`;
+    const fkUsuario = sessionStorage.ID_USUARIO;
+    alert(fkUsuario)
+
 
     var seconds = 0;
     var minutes = 0;
     var secondTemp = 0;
     var minuteTemp = 0;
     var hours = 0;
+    var cronometro = true;
 
     function time(){
         seconds++;
@@ -133,7 +137,7 @@
         if(minutes < 10){
             minuteTemp = ('0' + String(minutes))
         }else{
-            minuteTemp = monutes
+            minuteTemp = minutes
         }
 
         if(hours < 10){
@@ -156,14 +160,14 @@
             seconds=0;
         }
     }
-    setInterval(function(){ time() },1000)
+    if(cronometro){
+        setInterval(function(){ time() },1000)
+    }
 
     // Tela principal
     function game_area1_tabela(){
         game_area1.style.display = "none"
         game_area2.style.display = "flex"
-        var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
-        alert(tempo)
     }
     function game_area1_jornal(){
         game_area3.style.display = "flex"
@@ -231,14 +235,63 @@
     }
 
     // Sequencia do cofre
+    var tempo = 0;
+    var tempoSegundos = 0;
     function verify_seq(){
         // alert('Acabou')
         if(seq1.value == '5' && seq2.value == '4' && seq3.value == '0'){
             game_area9.style.display = 'flex'
             game_area5_1.style.display = 'none'
+            cronometro = false;
             var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
+            var tempoSegundos = 0;
+
+            var ary_time = [hoursTemp, minuteTemp, secondTemp];
+            for (let index = 0; index < 3; index ++){
+                if(Number(ary_time[index]) > 00){
+                    if(index == 0){
+                        tempoSegundos += Number(ary_time[index]) * 3600
+                    }
+                    if(index == 1){
+                        tempoSegundos += Number(ary_time[index]) * 60
+                    }
+                    if(index == 2){
+                        tempoSegundos += Number(ary_time[index])
+                    }
+                }
+            }
+            alert(`${tempoSegundos}\n${tempo}`)
+            registrarTempo()
         }
     }
 
+    function registrarTempo(){
+            // Enviando o valor da nova input
+            fetch("/usuarios/registrarTempo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    tempoServer: tempo,
+                    fkUsuarioServer: fkUsuario,
+                    tempoSegundosServer: tempoSegundos,
+                })
+            }).then(function (resposta) {
+    
+                console.log("resposta: ", resposta);
+    
+                if (resposta.ok) {
+                    
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+            return false;
+        }
 
 </script>

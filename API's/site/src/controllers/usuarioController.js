@@ -94,9 +94,42 @@ function cadastrar(req, res) {
     }
 }
 
+function registrarTempo(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var tempo = req.body.tempoServer;
+    var fkUsuario = req.body.fkUsuarioServer;
+    var tempoSegundos = req.body.tempoSegundosServer;
+
+    // Faça as validações dos valores
+    if (tempo == undefined) {
+        res.status(400).send("Seu tempo está undefined!");
+    }else if(tempoSegundos == undefined){
+        res.status(400).send("Seu tempo está undefined!");
+    }else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.registrarTempo(tempo, tempoSegundos, fkUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    registrarTempo
 }

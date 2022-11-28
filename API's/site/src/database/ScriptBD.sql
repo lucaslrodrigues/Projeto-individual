@@ -7,11 +7,11 @@ nome varchar(45),
 email varchar(45),
 senha varchar(45)
 );
-
+select*from tentativa;
 create table tentativa(
 idTentativa int auto_increment,
-tempo decimal(10,2),
-dtTentativa datetime,
+tempo varchar(8),
+tempoSegundos decimal(10),
 fkUsuario int, foreign key (fkUsuario) references usuario(idUsuario),
 primary key (idTentativa, fkUsuario)
 );

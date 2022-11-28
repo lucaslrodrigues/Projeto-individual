@@ -92,7 +92,7 @@ nav a{
 /*--------- JOGO ---------*/
 
 .game_images{
-    border: solid 3px white;
+    /* border: solid 3px white; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -255,7 +255,7 @@ nav a{
 /* Tela de finalização */
 
 .gameFinalizado{
-    border: white solid 3px;
+    /* border: white solid 3px; */
     width: 100%;
     height: 50%;
     display: flex;
