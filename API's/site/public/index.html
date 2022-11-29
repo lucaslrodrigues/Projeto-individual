@@ -14,7 +14,7 @@
                 <nav>
                     <div class="items">
                         <li><a href="login.html">Login</a></li>
-                        <li><a href="interacao.html">ScapeRoom</a></li>
+                        <li id="scaperoom" style="display: none;"><a href="interacao.html">ScapeRoom</a></li>
                     </div>
                     <li><span id="nome_usuario"></span></li>
                 </nav>
@@ -149,6 +149,7 @@
     var verify_login = sessionStorage.LOGADO;
     if(verify_login == "true"){
         var nome = sessionStorage.NOME_USUARIO;
-        nome_usuario.innerHTML = `${nome}`
+        nome_usuario.innerHTML = `${nome}`;
+        scaperoom.style.display = 'none';
     }
 </script>

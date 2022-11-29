@@ -94,21 +94,21 @@ function cadastrar(req, res) {
     }
 }
 
-function registrarTempo(req, res) {
+function regis(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var tempo = req.body.tempoServer;
-    var fkUsuario = req.body.fkUsuarioServer;
     var tempoSegundos = req.body.tempoSegundosServer;
+    var fkUsuario = req.body.fkUsuarioServer;
 
     // Faça as validações dos valores
     if (tempo == undefined) {
         res.status(400).send("Seu tempo está undefined!");
-    }else if(tempoSegundos == undefined){
-        res.status(400).send("Seu tempo está undefined!");
+    // }else if(tempoSegundos == undefined){
+    //     res.status(400).send("Seu tempo está undefined!");
     }else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.registrarTempo(tempo, tempoSegundos, fkUsuario)
+        usuarioModel.regis(tempo, tempoSegundos, fkUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -131,5 +131,5 @@ module.exports = {
     cadastrar,
     listar,
     testar,
-    registrarTempo
+    regis
 }

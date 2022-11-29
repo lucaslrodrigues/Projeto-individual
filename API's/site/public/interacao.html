@@ -103,8 +103,8 @@
             <!-- Finalizado -->
             <div id="game_area9" class="gameFinalizado" style="display: none;">
                 <div class="gameFinalizado_content">
-                    <span class="">Parabéns!! você escapou</span>
-                    <div><img src="Estilos/Imagens/scape room/chave.png" style="width: 10%;"></div>
+                    <span class="">Parabéns!! você encontrou a chave para a saída, clique para ver seu ranking</span>
+                    <a href="metricas.html"><div><img src="Estilos/Imagens/scape room/chave.png" style="width: 100px;"></div></a>
                 </div>
             </div>
 
@@ -116,8 +116,7 @@
 <script>
     const nome = sessionStorage.NOME_USUARIO;
     nome_usuario.innerHTML = `${nome}`;
-    const fkUsuario = sessionStorage.ID_USUARIO;
-    alert(fkUsuario)
+    var fkUsuario = sessionStorage.ID_USUARIO;
 
 
     var seconds = 0;
@@ -125,7 +124,9 @@
     var secondTemp = 0;
     var minuteTemp = 0;
     var hours = 0;
+    var hoursTemp = 0;
     var cronometro = true;
+    var teste = 0; 
 
     function time(){
         seconds++;
@@ -233,18 +234,16 @@
         game_area1.style.display = "flex"
         game_area8.style.display = "none"
     }
-
+    var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`;
     // Sequencia do cofre
-    var tempo = 0;
-    var tempoSegundos = 0;
     function verify_seq(){
         // alert('Acabou')
         if(seq1.value == '5' && seq2.value == '4' && seq3.value == '0'){
             game_area9.style.display = 'flex'
             game_area5_1.style.display = 'none'
             cronometro = false;
-            var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
-            var tempoSegundos = 0;
+            tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
+            tempoSegundos = 0;
 
             var ary_time = [hoursTemp, minuteTemp, secondTemp];
             for (let index = 0; index < 3; index ++){
@@ -257,17 +256,21 @@
                     }
                     if(index == 2){
                         tempoSegundos += Number(ary_time[index])
+                        alert(tempoSegundos)
                     }
                 }
             }
-            alert(`${tempoSegundos}\n${tempo}`)
-            registrarTempo()
+            regis(tempo, tempoSegundos)
         }
     }
 
-    function registrarTempo(){
+    function regis(){
+        // alert(tempo)
+        // alert(typeof tempo)
+        // alert('Tempo segundos ' +tempoSegundos)
+        // alert(typeof tempoSegundos)
             // Enviando o valor da nova input
-            fetch("/usuarios/registrarTempo", {
+            fetch("/usuarios/regis", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -276,8 +279,8 @@
                     // crie um atributo que recebe o valor recuperado aqui
                     // Agora vá para o arquivo routes/usuario.js
                     tempoServer: tempo,
-                    fkUsuarioServer: fkUsuario,
                     tempoSegundosServer: tempoSegundos,
+                    fkUsuarioServer: fkUsuario
                 })
             }).then(function (resposta) {
     
@@ -292,6 +295,6 @@
                 console.log(`#ERRO: ${resposta}`);
             });
             return false;
-        }
+    }
 
 </script>
