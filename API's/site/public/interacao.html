@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="Estilos/interacao.css">
     <title>JOGO</title>
 </head>
-<body>
+<body onload="verify_carta()">
     <header>
         <div class="container">
             <nav>
@@ -18,7 +18,7 @@
     </header>
     <section class="content">
         <div class="game">
-            <div class="game_top">
+            <div class="game_top" id="titulo_game">
                 <div class="game_top_content">
                     <span class="title"><b>ScapeRoom</b>: Sala do Einstein.</span>
                     <span class="text_normal">Tente resolver o enigma para escapar da sala do einstein.</span>
@@ -103,8 +103,21 @@
             <!-- Finalizado -->
             <div id="game_area9" class="gameFinalizado" style="display: none;">
                 <div class="gameFinalizado_content">
-                    <span class="">Parabéns!! você encontrou a chave para a saída, clique para ver seu ranking</span>
-                    <a href="metricas.html"><div><img src="Estilos/Imagens/scape room/chave.png" style="width: 100px;"></div></a>
+                    <div class="key_area">
+                        <span>Parabéns!! você encontrou a chave para a saída, clique para ver seu ranking</span>
+                        <a href="metricas.html"><div><img src="Estilos/Imagens/scape room/chave.png" style="width: 100px;"></div></a>
+                    </div>
+                    <div class="content" id="escrever_msg">
+                        <span class="title">Maquina do tempo</span>
+                        <span class="sub_title">Envie uma mensagem para o seu eu do futuro (maximo 250 caracteres)</span>
+                        <input type="text" class="msg_future" id="msg_future_id" maxlength="250">
+                        <button onclick="enviarCarta()">Enviar</button>
+                    </div>
+                    <div class="content" id="vizualizar_msg" style="display: none;">
+                        <span class="title">Maquina do tempo</span>
+                        <span class="sub_title">Veja a carta que você enviou</span>
+                        <button>Vizualizar</button>
+                    </div>
                 </div>
             </div>
 
@@ -239,6 +252,7 @@
         if(seq1.value == '5' && seq2.value == '4' && seq3.value == '0'){
             game_area9.style.display = 'flex'
             game_area5_1.style.display = 'none'
+            titulo_game.style.display = 'none'
             cronometro = false;
             tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`
             tempoSegundos = 0;
@@ -262,7 +276,6 @@
     }
 
     function regis(){
-        sessionStorage.ID_JOGOU = false;
             // Enviando o valor da nova input
             fetch("/usuarios/regis", {
                 method: "POST",
@@ -274,6 +287,75 @@
                     // Agora vá para o arquivo routes/usuario.js
                     tempoServer: tempo,
                     tempoSegundosServer: tempoSegundos,
+                    fkUsuarioServer: fkUsuario
+                })
+            }).then(function (resposta) {
+    
+                console.log("resposta: ", resposta);
+    
+                if (resposta.ok) {
+                    
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+            return false;
+    }
+
+    function verify_carta(){
+        fetch("/usuarios/verify_carta", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkUsuarioServer: fkUsuario
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                });
+
+            } else {
+
+                alert("Não tem carta")
+                console.log("Houve um erro ao tentar realizar o login!");
+                
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+    
+
+    function enviarCarta(){
+        enviar_msg.style.display = none;
+        vizualizar_msg.style.display = flex;
+        var msg = msg_future_id.value
+            // Enviando o valor da nova input
+            fetch("/usuarios/msg", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    msgServer: msg,
                     fkUsuarioServer: fkUsuario
                 })
             }).then(function (resposta) {

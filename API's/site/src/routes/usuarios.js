@@ -23,5 +23,11 @@ router.post("/autenticar", function (req, res) {
 router.post("/regis", function (req, res) {
     usuarioController.regis(req, res);
 })
+router.post("/msg", function (req, res) {
+    usuarioController.enviarCarta(req, res);
+})
+router.post("/verify_carta", function (req, res) {
+    usuarioController.verify_carta(req, res);
+});
 
 module.exports = router;

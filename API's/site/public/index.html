@@ -114,7 +114,24 @@
             </div>
         </div>
     </section>
-
+    <section class="game_scape_room">
+        <div class="content">
+            <span class="title">ScapeRoom</span>
+            <span class="sub_title">Jogue nosso scape room e veja quanto tempo você leva para escapar da sala do einstein!!</span>
+            <button onclick="logar()">Faça login</button>
+        </div>
+        <div class="content" id="escrever_msg" style="display: none;">
+            <span class="title">Maquina do tempo</span>
+            <span class="sub_title">Envie uma mensagem para o seu eu do futuro</span>
+            <button>Enviar</button>
+            <input type="text" class="msg_future">
+        </div>
+        <div class="content" style="display: none;">
+            <span class="title">Maquina do tempo</span>
+            <span class="sub_title">Envie uma mensagem para o seu eu do futuro</span>
+            <input type="text" class="msg_future">
+        </div>
+    </section>
     <!-- footer -->
     <footer class="footer">
         <div class="container">
@@ -151,5 +168,8 @@
         var nome = sessionStorage.NOME_USUARIO;
         nome_usuario.innerHTML = `${nome}`;
         scaperoom.style.display = 'block';
+    }
+    function logar(){
+        window.location = "login.html";
     }
 </script>
