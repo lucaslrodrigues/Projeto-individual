@@ -4,9 +4,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mural</title>
+    <link rel="stylesheet" href="Estilos/metricas.css">
 </head>
-<body>
-    
+<body onload="atualizarFeed()">
+    <header>
+        <div class="container">
+            <nav>
+                <li><a href="index.html">Home</a></li>
+                <li><span id="nome_usuario"></span> <img class="gif_lua" src="https://media.tenor.com/9pMpw3ZD4CEAAAAC/storymaker-moon.gif" alt="gif" style="width:30px;"></li>
+            </nav>
+        </div>
+    </header>
+    <div class="content_back">
+        <div class="content">
+            <div class="title_ranking">
+                <span>Ranking dos Usuários</span>
+            </div>
+            <div class="div-results">
+                <div id="feed_container" class="feed-container">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script>
+    var verify_login = sessionStorage.LOGADO;
+    if(verify_login == "true"){
+        var nome = sessionStorage.NOME_USUARIO;
+        nome_usuario.innerHTML = `${nome}`;
+    }
+    function atualizarFeed(){
+        fetch("/avisos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+
+
+                    var divIndice = document.createElement("div");
+                    divIndice.className = "div_indice";
+
+                    var indiceP = document.createElement("span");
+                    var indiceN = document.createElement("span");
+                    var indiceT = document.createElement("span");
+                    indiceP.className = "span_indice";
+                    indiceN.className = "span_indice";
+                    indiceT.className = "span_indice";
+
+                    indiceP.innerHTML = "Posição";
+                    indiceN.innerHTML = "Usuário";
+                    indiceT.innerHTML = "Tempo";
+                    divIndice.appendChild(indiceP);
+                    divIndice.appendChild(indiceN);
+                    divIndice.appendChild(indiceT);
+
+                    feed.appendChild(divIndice);
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        var position = (i + 1) + '°';
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        // var spanID = document.createElement("span");
+                        // var spanTitulo = document.createElement("span");
+                        var spanPosition = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var divTempo = document.createElement("span");
+                        // var divButtons = document.createElement("div");
+                        // var btnEditar = document.createElement("button");
+                        // var btnDeletar = document.createElement("button");
+
+
+                        // spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
+                        // spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanPosition.innerHTML = position;
+                        spanNome.innerHTML = publicacao.Nome;
+                        divTempo.innerHTML = publicacao.Tempo;
+                        // btnEditar.innerHTML = "Editar";
+                        // btnDeletar.innerHTML = "Deletar";
+
+                        divPublicacao.className = "publicacao";
+                        // spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                        spanPosition.className = "span_result";
+                        spanNome.className = "span_result";
+                        // spanTitulo.className = "publicacao-titulo";
+                        divTempo.className = "span_result";
+
+                        // divButtons.className = "div-buttons"
+
+                        // btnEditar.className = "publicacao-btn-editar"
+                        // btnEditar.id = "btnEditar" + publicacao.idAviso;
+                        // btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
+
+                        // btnDeletar.className = "publicacao-btn-editar"
+                        // btnDeletar.id = "btnDeletar" + publicacao.idAviso;
+                        // btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
+
+                        // divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanPosition);
+                        divPublicacao.appendChild(spanNome);
+                        // divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(divTempo);
+                        // divPublicacao.appendChild(divButtons);
+                        // divButtons.appendChild(btnEditar);
+                        // divButtons.appendChild(btnDeletar);
+                        feed.appendChild(divPublicacao);
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+</script>

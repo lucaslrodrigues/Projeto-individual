@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Estilos/interacao.css">
-    <title>Jogo</title>
+    <title>JOGO</title>
 </head>
 <body>
     <header>
@@ -112,7 +112,6 @@
     </section>
 </body>
 </html>
-<!-- <scrip src="scapeRoom.js"></script> -->
 <script>
     const nome = sessionStorage.NOME_USUARIO;
     nome_usuario.innerHTML = `${nome}`;
@@ -237,7 +236,6 @@
     var tempo = `${hoursTemp}:${minuteTemp}:${secondTemp}`;
     // Sequencia do cofre
     function verify_seq(){
-        // alert('Acabou')
         if(seq1.value == '5' && seq2.value == '4' && seq3.value == '0'){
             game_area9.style.display = 'flex'
             game_area5_1.style.display = 'none'
@@ -256,7 +254,6 @@
                     }
                     if(index == 2){
                         tempoSegundos += Number(ary_time[index])
-                        alert(tempoSegundos)
                     }
                 }
             }
@@ -265,10 +262,7 @@
     }
 
     function regis(){
-        // alert(tempo)
-        // alert(typeof tempo)
-        // alert('Tempo segundos ' +tempoSegundos)
-        // alert(typeof tempoSegundos)
+        sessionStorage.ID_JOGOU = false;
             // Enviando o valor da nova input
             fetch("/usuarios/regis", {
                 method: "POST",
